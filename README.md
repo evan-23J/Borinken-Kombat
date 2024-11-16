@@ -1,2 +1,2 @@
 # Borinken-Kombat
-A fighting game created by college students using c++
+Este es un juego de pelea desarrollado en C++ con personajes y ataques que hacen alusión a la cultura puertorriqueña. Dentro de nuestro programa puedes elegir entre 3 personajes, El Jíbaro, Doña Ilda y Jota Uve. Cada personaje cuenta con 2 ataques únicos. El programa te permite jugar con hasta 2 personas, de manera local y de la misma computadora. El juego consta de varias rondas y termina cuando la vida de alguno de los jugadores llegue a cero. Para crear este programa utilicé loops (for()), condiciones [ if, else if, switch case ], arrays de 1 dimensión y variables de distintos tipos. El juego también cuenta con la libreria <SFML/Audio.hpp> para audio y efectos de sonido.
