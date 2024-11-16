@@ -1,0 +1,1021 @@
+
+#include <iostream>
+#include <SFML/Audio.hpp>
+using namespace std;
+int main()
+{
+    //Realizado por Evan Tellado
+    char run = 'Y';
+    //Stats = HP , Fuerza, Stamina
+    int stats1[3] = { 120, 75, 75 };
+    int stats2[3] = { 70, 100, 50 };
+    int stats3[3] = { 100, 75, 100 };
+
+    bool repeat = true;
+
+    int hp1 = 100;
+    int hp2 = 100;
+
+    string personaje1;
+    string personaje2;
+    int player1;
+    int player2;
+    int attack1;
+    int attack2;
+
+    // Cargar musica de inicio
+    sf::Music musicInicio;
+    if (!musicInicio.openFromFile("main_theme.ogg")) {
+        cout << "Error cargando la música de inicio\n";
+        return -1;
+    }
+    musicInicio.setLoop(true);  // Repetir la música en bucle
+    musicInicio.setVolume(50);  // Ajustar el volumen a la mitad (puedes cambiar este valor)
+    musicInicio.play();  // Reproduce la música de fondo
+
+    // Cargar sonido de ataque
+    sf::SoundBuffer bufferAttack;
+    if (!bufferAttack.loadFromFile("punch.wav")) {
+        cout << "Error cargando el sonido de ataque\n";
+        return -1;
+    }
+    sf::Sound soundAttack;
+    soundAttack.setBuffer(bufferAttack);
+
+
+    cout << "*********************************\n";
+    cout << "*    Bienvenido a Borinken Kombat!      *\n";
+    cout << "*  Presiona cualquier tecla para comenzar... *\n";
+    cout << "*********************************\n";
+    cin.get();  // Lee un caracter pero no lo guarda
+
+
+
+    for (run; run == 'Y'; run) {
+        int hp1 = 100;
+        int hp2 = 100;
+        int stats1[3] = { 120, 75, 75 };
+        int stats2[3] = { 70, 100, 50 };
+        int stats3[3] = { 100, 75, 100 };
+        repeat = true;
+        while (repeat == true) {
+            cout << "Eliga un personaje: " << endl;
+            cout << "Jibaro (1) " << endl;
+            cout << "HP: " << stats1[0] << " Fuerza: " << stats1[1] << " Agilidad " << stats1[2] << endl;
+            cout << "Habilidades: Machetazo" << endl;
+
+            cout << "\n";
+            cout << "-----------------------------" << endl;
+
+            cout << "Doña Ilda (2) " << endl;
+            cout << "HP: " << stats2[0] << " Fuerza: " << stats2[1] << " Agilidad " << stats2[2] << endl;
+            cout << "Habilidades: Chancleta Voladora" << endl;
+
+            cout << "\n";
+            cout << "-----------------------------" << endl;
+
+            cout << "Jota Uve (3) " << endl;
+            cout << "HP: " << stats3[0] << " Fuerza: " << stats3[1] << " Agilidad " << stats3[2] << endl;
+            cout << "Habilidades: Toma Mango!" << endl;
+
+            cout << "Player 1: " << endl;
+            cin >> player1;
+            cout << "-----------------------------" << endl;
+            cout << "Player 2: " << endl;
+            cin >> player2;
+            cout << "-----------------------------" << endl;
+
+            if (player1 < 1 || player1>3) {
+                cout << "Input Invalido, intentelo nuevamente:\n";
+                cin >> player1;
+
+            }
+            else if (player2 < 1 || player2>3) {
+                cout << "Input Invalido, intentelo nuevamente:\n";
+                cin >> player2;
+
+            }
+
+            switch (player1) {
+            case 1:
+                personaje1 = "Jibaro";
+                hp1 = stats1[0];
+                break;
+
+            case 2:
+                personaje1 = "Doña Ilda";
+                hp1 = stats2[0];
+                break;
+
+            case 3:
+                personaje1 = "Jota Uve";
+                hp1 = stats3[0];
+                break;
+            }
+
+            switch (player2) {
+            case 1:
+                personaje2 = "Jibaro";
+                hp2 = stats1[0];
+                break;
+
+            case 2:
+                personaje2 = "Doña Ilda";
+                hp2 = stats2[0];
+                break;
+
+            case 3:
+                personaje2 = "Jota Uve";
+                hp2 = stats3[0];
+                break;
+            }
+            musicInicio.stop();
+
+            // Cargar musica de batalla
+            sf::Music musicBattle;
+            if (!musicBattle.openFromFile("battle_theme.ogg")) {
+                cout << "Error cargando la música de batalla\n";
+                return -1;
+            }
+            musicBattle.setLoop(true);  // Repetir la música en bucle
+            musicBattle.setVolume(50);  // Ajustar el volumen a la mitad (puedes cambiar este valor)
+            musicBattle.play();  // Reproduce la música de fondo
+
+            cout << personaje1 << " VS " << personaje2 << endl;
+            cout << "-----------------------------" << endl;
+
+            cout << "              1" << endl;
+            cout << "-----------------------------" << endl;
+            cout << "              2" << endl;
+            cout << "-----------------------------" << endl;
+            cout << "              3" << endl;
+            cout << "-----------------------------" << endl;
+            cout << "            FIGHT!" << endl;
+            cout << "*****************************" << endl;
+
+            while (repeat == true) {
+
+                //PLAYER 1
+
+                for (player1; player1 > 0; player1) {
+                    if (player1 == 1) {
+                        cout << "Machetazo (1) \n";
+                        cout << "Cuatrazo  (2) \n";
+                        cin >> attack1;
+                        soundAttack.play();  // Reproduce sonido de ataque
+
+                        if (attack1 == 1) {
+                            if (player2 == 1) {
+                                stats1[0] = stats1[0] - 25;
+                                cout << "P2 HP:" << stats1[0] << endl;
+                                hp2 = stats1[0];
+
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                } break;
+                            }
+                            else if (player2 == 2) {
+                                stats2[0] = stats2[0] - 25;
+                                cout << "P2 HP:" << stats2[0] << endl;
+                                hp2 = stats2[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+                            else if (player2 == 3) {
+                                stats3[0] = stats3[0] - 25;
+                                cout << "P2 HP:" << stats3[0] << endl;
+                                hp2 = stats3[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+
+
+
+                        }
+
+
+
+                        if (attack1 == 2) {
+                            if (player2 == 1) {
+                                stats1[0] = stats1[0] - 15;
+                                cout << "P2 HP:" << stats1[0] << endl;
+                                hp2 = stats1[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+                            else if (player2 == 2) {
+                                stats2[0] = stats2[0] - 15;
+                                cout << "P2 HP:" << stats2[0] << endl;
+                                hp2 = stats2[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+                            else if (player2 == 3) {
+                                stats3[0] = stats3[0] - 15;
+                                cout << "P2 HP:" << stats3[0] << endl;
+                                hp2 = stats3[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+
+                        }
+
+                    }
+
+                    if (player1 == 2) {
+                        cout << "Chancleta voladora! (1) \n";
+                        cout << "Bastonazo!          (2) \n";
+                        cin >> attack1;
+                        soundAttack.play();
+                        if (attack1 == 1) {
+                            if (player2 == 1) {
+                                stats1[0] = stats1[0] - 15;
+                                cout << "P2 HP:" << stats1[0] << endl;
+                                hp2 = stats1[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+                            else if (player2 == 2) {
+                                stats2[0] = stats2[0] - 15;
+                                cout << "P2 HP:" << stats2[0] << endl;
+                                hp2 = stats2[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+                            else if (player2 == 3) {
+                                stats3[0] = stats3[0] - 15;
+                                cout << "P2 HP:" << stats3[0] << endl;
+                                hp2 = stats3[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+
+
+                        }
+
+
+
+                        if (attack1 == 2) {
+                            if (player2 == 1) {
+                                stats1[0] = stats1[0] - 30;
+                                cout << "P2 HP:" << stats1[0] << endl;
+                                hp2 = stats1[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+                            else if (player2 == 2) {
+                                stats2[0] = stats2[0] - 30;
+                                cout << "P2 HP:" << stats2[0] << endl;
+                                hp2 = stats2[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+                            else if (player2 == 3) {
+                                stats3[0] = stats3[0] - 30;
+                                cout << "P2 HP:" << stats3[0] << endl;
+                                hp2 = stats3[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+
+
+                        }
+
+
+
+
+                    }
+                    if (player1 == 3) {
+                        cout << "Este es Jovaniii SOUNDBLAST! (1) \n";
+                        cout << "Toma MANGO!                  (2) \n";
+                        cin >> attack1;
+                        soundAttack.play();
+                        if (attack1 == 1) {
+                            if (player2 == 1) {
+                                stats1[0] = stats1[0] - 35;
+                                cout << "P2 HP:" << stats1[0] << endl;
+                                hp2 = stats1[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+                            else if (player2 == 2) {
+                                stats2[0] = stats2[0] - 35;
+                                cout << "P2 HP:" << stats2[0] << endl;
+                                hp2 = stats2[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+                            else if (player2 == 3) {
+                                stats3[0] = stats3[0] - 35;
+                                cout << "P2 HP:" << stats3[0] << endl;
+                                hp2 = stats3[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+
+
+                        }
+
+                        if (attack1 == 2) {
+                            if (player2 == 1) {
+                                stats1[0] = stats1[0] - 25;
+                                cout << "P2 HP:" << stats1[0] << endl;
+                                hp2 = stats1[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+                            else if (player2 == 2) {
+                                stats2[0] = stats2[0] - 25;
+                                cout << "P2 HP:" << stats2[0] << endl;
+                                hp2 = stats2[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+                            else if (player2 == 3) {
+                                stats3[0] = stats3[0] - 25;
+                                cout << "P2 HP:" << stats3[0] << endl;
+                                hp2 = stats3[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+
+
+
+
+                        }
+                    }
+
+                }
+
+                //PLAYER 2
+
+                cout << "PLAYER 2: " << endl;
+                for (player2; player2 > 0; player2) {
+                    if (player2 == 1) {
+                        cout << "Machetazo (1) \n";
+                        cout << "Cuatrazo  (2) \n";
+                        cin >> attack1;
+                        soundAttack.play();
+                        if (attack1 == 1) {
+                            if (player1 == 1) {
+                                stats1[0] == stats1[0] - 25;
+                                cout << "P1 HP:" << stats1[0] << endl;
+                                hp1 = stats1[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+                            else if (player1 == 2) {
+                                stats2[0] = stats2[0] - 25;
+                                cout << "P1 HP:" << stats2[0] << endl;
+                                hp1 = stats2[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+                            else if (player1 == 3) {
+                                stats3[0] = stats3[0] - 25;
+                                cout << "P1 HP:" << stats3[0] << endl;
+                                hp1 = stats3[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+
+
+                        }
+
+
+                        if (attack1 == 2) {
+                            if (player1 == 1) {
+                                stats1[0] = stats1[0] - 15;
+                                cout << "P1 HP:" << stats1[0] << endl;
+                                hp1 = stats1[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+                            else if (player1 == 2) {
+                                stats2[0] = stats2[0] - 15;
+                                cout << "P1 HP:" << stats2[0] << endl;
+                                hp1 = stats2[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+                            else if (player1 == 3) {
+                                stats3[0] = stats3[0] - 15;
+                                cout << "P1 HP:" << stats3[0] << endl;
+                                hp1 = stats3[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+
+                        }
+
+
+
+                    }
+
+                    if (player2 == 2) {
+                        cout << "Chancleta voladora! (1) \n";
+                        cout << "Bastonazo!          (2) \n";
+                        cin >> attack1;
+                        soundAttack.play();
+                        if (attack1 == 1) {
+                            if (player1 == 1) {
+                                stats1[0] = stats1[0] - 15;
+                                cout << "P1 HP:" << stats1[0] << endl;
+                                hp1 = stats1[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+                            else if (player1 == 2) {
+                                stats2[0] = stats2[0] - 15;
+                                cout << "P1 HP:" << stats2[0] << endl;
+                                hp1 = stats2[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+                            else if (player1 == 3) {
+                                stats3[0] = stats3[0] - 15;
+                                cout << "P1 HP:" << stats3[0] << endl;
+                                hp1 = stats3[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+
+                        }
+
+
+                        if (attack1 == 2) {
+                            if (player1 == 1) {
+                                stats1[0] = stats1[0] - 30;
+                                cout << "P1 HP:" << stats1[0] << endl;
+                                hp1 = stats1[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+                            else if (player1 == 2) {
+                                stats2[0] = stats2[0] - 30;
+                                cout << "P1 HP:" << stats2[0] << endl;
+                                hp1 = stats2[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+                            else if (player1 == 3) {
+                                stats3[0] = stats3[0] - 30;
+                                cout << "P1 HP:" << stats3[0] << endl;
+                                hp1 = stats3[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+
+                        }
+
+
+                    }
+                    if (player2 == 3) {
+                        cout << "Este es Jovaniii SOUNDBLAST! (1) \n";
+                        cout << "Toma MANGO!                  (2) \n";
+                        cin >> attack1;
+                        soundAttack.play();
+                        if (attack1 == 1) {
+                            if (player1 == 1) {
+                                stats1[0] = stats1[0] - 35;
+                                cout << "P1 HP:" << stats1[0] << endl;
+                                hp1 = stats1[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+                            else if (player1 == 2) {
+                                stats2[0] = stats2[0] - 35;
+                                cout << "P1 HP:" << stats2[0] << endl;
+                                hp1 = stats2[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+                            else if (player1 == 3) {
+                                stats3[0] = stats3[0] - 35;
+                                cout << "P1 HP:" << stats3[0] << endl;
+                                hp1 = stats3[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+
+
+                        }
+
+
+                        if (attack1 == 2) {
+                            if (player1 = 1) {
+                                stats1[0] = stats1[0] - 25;
+                                cout << "P1 HP:" << stats1[0] << endl;
+                                hp1 = stats1[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+                            else if (player1 == 2) {
+                                stats2[0] = stats2[0] - 25;
+                                cout << "P1 HP:" << stats2[0] << endl;
+                                hp1 = stats2[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+                            else if (player1 == 3) {
+                                stats3[0] = stats3[0] - 25;
+                                cout << "P1 HP:" << stats3[0] << endl;
+                                hp1 = stats3[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+
+
+                        }
+
+
+
+                    }
+                }
+
+
+
+
+
+
+            }
+            musicBattle.stop();
+        roundend:
+            cout << "Play again? (Y/N): ";
+            cin >> run;
+            if (run == 'Y') {
+                repeat == true;
+            }
+        }
+
+
+
+        }
+    } 
+    return 0;
+}
