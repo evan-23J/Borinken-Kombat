@@ -44,7 +44,7 @@ int main()
 
 
     cout << "*********************************\n";
-    cout << "*    Bienvenido a Borinken Kombat!      *\n";
+    cout << "*    Bienvenido a Borinquen Kombat!      *\n";
     cout << "*  Presiona cualquier tecla para comenzar... *\n";
     cout << "*********************************\n";
     cin.get();  // Lee un caracter pero no lo guarda
@@ -67,7 +67,7 @@ int main()
             cout << "\n";
             cout << "-----------------------------" << endl;
 
-            cout << "Doña Ilda (2) " << endl;
+            cout << "Dona Ilda (2) " << endl;
             cout << "HP: " << stats2[0] << " Fuerza: " << stats2[1] << " Agilidad " << stats2[2] << endl;
             cout << "Habilidades: Chancleta Voladora" << endl;
 
@@ -103,7 +103,7 @@ int main()
                 break;
 
             case 2:
-                personaje1 = "Doña Ilda";
+                personaje1 = "Dona Ilda";
                 hp1 = stats2[0];
                 break;
 
@@ -120,7 +120,7 @@ int main()
                 break;
 
             case 2:
-                personaje2 = "Doña Ilda";
+                personaje2 = "Dona Ilda";
                 hp2 = stats2[0];
                 break;
 
@@ -1016,6 +1016,6 @@ int main()
 
 
         }
-    } 
+     
     return 0;
 }
