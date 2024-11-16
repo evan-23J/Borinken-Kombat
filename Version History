@@ -1,0 +1,15 @@
+Version 1.0 :
+  Permite a los jugadores elegir personajes y a la hora de atacar restar puntos de vida al otro jugador.
+  Codigo se repetite indefinidamente.
+
+Version 1.1 :
+El juego continúa hasta que la vida de alguno de los jugadores sea <= 0.
+Te da la opción de "Play again" una vez la vida de alguno de los jugadores sea <=0.
+
+Version 1.2: 
+Se incorpora música de fondo y efectos de sonido a la hora del ataque.
+
+Version 1.3: 
+
+
+
