@@ -50,7 +50,7 @@ int main()
     cin.get();  // Lee un caracter pero no lo guarda
 
 
-
+    //Loop que carga el juego utilizando (run == 'Y') como condicion - Evan
     for (run; run == 'Y'; run) {
         int hp1 = 100;
         int hp2 = 100;
@@ -58,6 +58,9 @@ int main()
         int stats2[3] = { 70, 100, 50 };
         int stats3[3] = { 100, 75, 100 };
         repeat = true;
+        
+
+        // Este loop crea las rondas en el caso de que hp > 0 -Evan
         while (repeat == true) {
             cout << "Eliga un personaje: " << endl;
             cout << "Jibaro (1) " << endl;
@@ -85,6 +88,9 @@ int main()
             cin >> player2;
             cout << "-----------------------------" << endl;
 
+
+            //Condicion que evita que el usuario entre un input invalido - Evan
+
             if (player1 < 1 || player1>3) {
                 cout << "Input Invalido, intentelo nuevamente:\n";
                 cin >> player1;
@@ -95,6 +101,8 @@ int main()
                 cin >> player2;
 
             }
+
+            //Condicion para imprimir en pantalla el nombre del personaje de los jugadores en base al personaje que escojan - Evan
 
             switch (player1) {
             case 1:
@@ -155,7 +163,10 @@ int main()
 
             while (repeat == true) {
 
-                //PLAYER 1
+                /*PLAYER 1
+                 Este loop controla las acciones y efectos de los ataques de Player 1 - Evan
+                Utilizando condiciones determinamos el personaje que escogio el jugador, a base del personaje determinamos los ataques a mostrar en pantalla
+                y el daño que hacen los mismos a P2, utilizando goto hacemos que if hp <= 0 se rompa el loop y nos lleve al bloque de codigo que determinemos - Evan */
 
                 for (player1; player1 > 0; player1) {
                     if (player1 == 1) {
@@ -163,6 +174,8 @@ int main()
                         cout << "Cuatrazo  (2) \n";
                         cin >> attack1;
                         soundAttack.play();  // Reproduce sonido de ataque
+
+                        //Con esta condicion evaluamos el personaje escogido por P2 y le adjudicamos el daño a su hp en base al ataque escogido por P1 - Evan
 
                         if (attack1 == 1) {
                             if (player2 == 1) {
@@ -175,13 +188,13 @@ int main()
                                     cout << "PLAYER 2 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
                                 else if (hp2 <= 0) {
                                     cout << "PLAYER 1 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 } break;
                             }
                             else if (player2 == 2) {
@@ -193,13 +206,13 @@ int main()
                                     cout << "PLAYER 2 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
                                 else if (hp2 <= 0) {
                                     cout << "PLAYER 1 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
 
                                 break;
@@ -213,13 +226,13 @@ int main()
                                     cout << "PLAYER 2 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
                                 else if (hp2 <= 0) {
                                     cout << "PLAYER 1 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
 
                                 break;
@@ -241,13 +254,13 @@ int main()
                                     cout << "PLAYER 2 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
                                 else if (hp2 <= 0) {
                                     cout << "PLAYER 1 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
 
                                 break;
@@ -261,13 +274,13 @@ int main()
                                     cout << "PLAYER 2 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
                                 else if (hp2 <= 0) {
                                     cout << "PLAYER 1 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
 
                                 break;
@@ -281,13 +294,13 @@ int main()
                                     cout << "PLAYER 2 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
                                 else if (hp2 <= 0) {
                                     cout << "PLAYER 1 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
 
                                 break;
@@ -578,7 +591,9 @@ int main()
 
                 }
 
-                //PLAYER 2
+                /*PLAYER 2 
+                    Aqui evaluamos el personaje escogido por P2, en base al personaje escogido imprimos en pantalla los ataques de ese personaje, luego
+                    evaluamos el ataque escogido por P2 y le adjudicamos el daño al hp de P1*/
 
                 cout << "PLAYER 2: " << endl;
                 for (player2; player2 > 0; player2) {
@@ -617,13 +632,13 @@ int main()
                                     cout << "PLAYER 2 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
                                 else if (hp2 <= 0) {
                                     cout << "PLAYER 1 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
 
                                 break;
@@ -637,13 +652,13 @@ int main()
                                     cout << "PLAYER 2 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
                                 else if (hp2 <= 0) {
                                     cout << "PLAYER 1 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
 
                                 break;
@@ -663,13 +678,13 @@ int main()
                                     cout << "PLAYER 2 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
                                 else if (hp2 <= 0) {
                                     cout << "PLAYER 1 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
 
                                 break;
@@ -683,13 +698,13 @@ int main()
                                     cout << "PLAYER 2 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
                                 else if (hp2 <= 0) {
                                     cout << "PLAYER 1 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
 
                                 break;
@@ -703,13 +718,13 @@ int main()
                                     cout << "PLAYER 2 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
                                 else if (hp2 <= 0) {
                                     cout << "PLAYER 1 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
 
                                 break;
@@ -736,13 +751,13 @@ int main()
                                     cout << "PLAYER 2 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
                                 else if (hp2 <= 0) {
                                     cout << "PLAYER 1 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
 
                                 break;
@@ -756,13 +771,13 @@ int main()
                                     cout << "PLAYER 2 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
                                 else if (hp2 <= 0) {
                                     cout << "PLAYER 1 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
 
                                 break;
@@ -776,13 +791,13 @@ int main()
                                     cout << "PLAYER 2 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
                                 else if (hp2 <= 0) {
                                     cout << "PLAYER 1 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
 
                                 break;
@@ -801,13 +816,13 @@ int main()
                                     cout << "PLAYER 2 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
                                 else if (hp2 <= 0) {
                                     cout << "PLAYER 1 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
 
                                 break;
@@ -821,13 +836,13 @@ int main()
                                     cout << "PLAYER 2 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
                                 else if (hp2 <= 0) {
                                     cout << "PLAYER 1 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
 
                                 break;
@@ -841,13 +856,13 @@ int main()
                                     cout << "PLAYER 2 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
                                 else if (hp2 <= 0) {
                                     cout << "PLAYER 1 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
 
                                 break;
@@ -872,13 +887,13 @@ int main()
                                     cout << "PLAYER 2 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                   
                                 }
                                 else if (hp2 <= 0) {
                                     cout << "PLAYER 1 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
 
                                 break;
@@ -892,13 +907,13 @@ int main()
                                     cout << "PLAYER 2 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
                                 else if (hp2 <= 0) {
                                     cout << "PLAYER 1 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
 
                                 break;
@@ -912,13 +927,13 @@ int main()
                                     cout << "PLAYER 2 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
                                 else if (hp2 <= 0) {
                                     cout << "PLAYER 1 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
 
                                 break;
@@ -938,13 +953,13 @@ int main()
                                     cout << "PLAYER 2 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
                                 else if (hp2 <= 0) {
                                     cout << "PLAYER 1 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
 
                                 break;
@@ -958,13 +973,13 @@ int main()
                                     cout << "PLAYER 2 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
                                 else if (hp2 <= 0) {
                                     cout << "PLAYER 1 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
 
                                 break;
@@ -978,13 +993,13 @@ int main()
                                     cout << "PLAYER 2 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
                                 else if (hp2 <= 0) {
                                     cout << "PLAYER 1 WINS!! \n";
                                     repeat = false;
                                     goto roundend;
-                                    break;
+                                    
                                 }
 
                                 break;
@@ -1005,12 +1020,20 @@ int main()
 
             }
             musicBattle.stop();
+
+            // con este es el codigo que se ejecuta al llegar a "goto". Aqui se le permite al usuario elegir si desea jugar otra vez. - Evan
+
         roundend:
             cout << "Play again? (Y/N): ";
             cin >> run;
             if (run == 'Y') {
                 repeat == true;
             }
+            else {
+                cout << "Gracias por jugar!";
+                repeat == false;
+            }
+
         }
 
 
