@@ -42,6 +42,14 @@ int main()
     sf::Sound soundAttack;
     soundAttack.setBuffer(bufferAttack);
 
+    sf::SoundBuffer bufferVictory;
+    if (!bufferVictory.loadFromFile("victory.wav")) {
+        cout << "Error cargando el sonido de victoria\n";
+        return -1;
+    }
+    sf::Sound soundVictory;
+    soundVictory.setBuffer(bufferVictory);
+
 
     // Obtener el manejador de la consola
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -329,70 +337,70 @@ int main()
                         cout << "Bastonazo!          (2) \n";
                         cin >> attack1;
                         soundAttack.play(); //(Caleb)
-                            if (attack1 == 1) {
-                                if (player2 == 1) {
-                                    stats1[0] = stats1[0] - 15;
-                                    cout << "P2 HP:" << stats1[0] << endl;
-                                    hp2 = stats1[0];
+                        if (attack1 == 1) {
+                            if (player2 == 1) {
+                                stats1[0] = stats1[0] - 15;
+                                cout << "P2 HP:" << stats1[0] << endl;
+                                hp2 = stats1[0];
 
-                                    if (hp1 <= 0) {
-                                        cout << "PLAYER 2 WINS!! \n";
-                                        repeat = false;
-                                        goto roundend;
-                                        break;
-                                    }
-                                    else if (hp2 <= 0) {
-                                        cout << "PLAYER 1 WINS!! \n";
-                                        repeat = false;
-                                        goto roundend;
-                                        break;
-                                    }
-
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
                                     break;
                                 }
-                                else if (player2 == 2) {
-                                    stats2[0] = stats2[0] - 15;
-                                    cout << "P2 HP:" << stats2[0] << endl;
-                                    hp2 = stats2[0];
-
-                                    if (hp1 <= 0) {
-                                        cout << "PLAYER 2 WINS!! \n";
-                                        repeat = false;
-                                        goto roundend;
-                                        break;
-                                    }
-                                    else if (hp2 <= 0) {
-                                        cout << "PLAYER 1 WINS!! \n";
-                                        repeat = false;
-                                        goto roundend;
-                                        break;
-                                    }
-
-                                    break;
-                                }
-                                else if (player2 == 3) {
-                                    stats3[0] = stats3[0] - 15;
-                                    cout << "P2 HP:" << stats3[0] << endl;
-                                    hp2 = stats3[0];
-
-                                    if (hp1 <= 0) {
-                                        cout << "PLAYER 2 WINS!! \n";
-                                        repeat = false;
-                                        goto roundend;
-                                        break;
-                                    }
-                                    else if (hp2 <= 0) {
-                                        cout << "PLAYER 1 WINS!! \n";
-                                        repeat = false;
-                                        goto roundend;
-                                        break;
-                                    }
-
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
                                     break;
                                 }
 
-
+                                break;
                             }
+                            else if (player2 == 2) {
+                                stats2[0] = stats2[0] - 15;
+                                cout << "P2 HP:" << stats2[0] << endl;
+                                hp2 = stats2[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+                            else if (player2 == 3) {
+                                stats3[0] = stats3[0] - 15;
+                                cout << "P2 HP:" << stats3[0] << endl;
+                                hp2 = stats3[0];
+
+                                if (hp1 <= 0) {
+                                    cout << "PLAYER 2 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+                                else if (hp2 <= 0) {
+                                    cout << "PLAYER 1 WINS!! \n";
+                                    repeat = false;
+                                    goto roundend;
+                                    break;
+                                }
+
+                                break;
+                            }
+
+
+                        }
 
 
 
@@ -1035,9 +1043,11 @@ int main()
             }
             musicBattle.stop(); //(Caleb)
 
-                // con este es el codigo que se ejecuta al llegar a "goto". Aqui se le permite al usuario elegir si desea jugar otra vez. - Evan
+            // con este es el codigo que se ejecuta al llegar a "goto". Aqui se le permite al usuario elegir si desea jugar otra vez. - Evan
 
-            roundend:
+        roundend:
+            musicBattle.stop(); // Para parar la musica de batalla
+            soundVictory.play(); // Para parar la musica de victoria (Caleb)
             cout << "Play again? (Y/N): ";
             cin >> run;
             if (run == 'Y') {
