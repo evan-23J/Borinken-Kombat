@@ -4,8 +4,10 @@
 using namespace std;
 int main()
 {
-    //Realizado por Evan Tellado
+    //Realizado por Evan Tellado y Caleb Olivieri 
+
     char run = 'Y';
+
     //Stats = HP , Fuerza, Stamina
     const int stats1[3] = { 120, 75, 75 };
     const int stats2[3] = { 70, 100, 50 };
@@ -42,6 +44,8 @@ int main()
     sf::Sound soundAttack;
     soundAttack.setBuffer(bufferAttack);
 
+
+    // Cargar sonido de victoria (Caleb)
     sf::SoundBuffer bufferVictory;
     if (!bufferVictory.loadFromFile("victory.wav")) {
         cout << "Error cargando el sonido de victoria\n";
@@ -74,15 +78,14 @@ int main()
 
     //Loop que carga el juego utilizando (run == 'Y') como condicion - Evan
     for (run; run == 'Y'; run) {
-        int hp1 = 100;
-        int hp2 = 100;
+ 
         int stats1[3] = { 120, 75, 75 };
         int stats2[3] = { 70, 100, 50 };
         int stats3[3] = { 100, 75, 100 };
         repeat = true;
 
 
-        // Este loop crea las rondas en el caso de que hp > 0 -Evan
+        // Este loop se repite cuando es usuario decide jugar otra vez -Evan
         while (repeat == true) {
             cout << "Eliga un personaje: " << endl;
             cout << "Jibaro (1) " << endl;
@@ -171,7 +174,7 @@ int main()
             musicBattle.setVolume(50);  // Ajustar el volumen a la mitad (puedes cambiar este valor)
             musicBattle.play();  // Reproduce la música de fondo
 
-            cout <<"    "<< personaje1 << " VS " << personaje2 << endl;
+            cout << "    " << personaje1 << " VS " << personaje2 << endl;
             cout << "-----------------------------" << endl;
 
             cout << "              1" << endl;
@@ -183,6 +186,7 @@ int main()
             cout << "            FIGHT!" << endl;
             cout << "*****************************" << endl;
 
+            //Loop que crea las rondas mientras el hp de player1 y player2 sean >0 - Evan
             while (repeat == true) {
 
                 /*PLAYER 1
@@ -615,7 +619,7 @@ int main()
 
                 /*PLAYER 2
                     Aqui evaluamos el personaje escogido por P2, en base al personaje escogido imprimos en pantalla los ataques de ese personaje, luego
-                    evaluamos el ataque escogido por P2 y le adjudicamos el daño al hp de P1*/
+                    evaluamos el ataque escogido por P2 y le adjudicamos el daño al hp de P1 - Evan*/
 
                 cout << "PLAYER 2: " << endl;
                 for (player2; player2 > 0; player2) {
@@ -1043,11 +1047,11 @@ int main()
             }
             musicBattle.stop(); //(Caleb)
 
-            // con este es el codigo que se ejecuta al llegar a "goto". Aqui se le permite al usuario elegir si desea jugar otra vez. - Evan
+            // Este es el codigo que se ejecuta al llegar a "goto". Aqui se le permite al usuario elegir si desea jugar otra vez. - Evan
 
         roundend:
             musicBattle.stop(); // Para parar la musica de batalla
-            soundVictory.play(); // Para parar la musica de victoria (Caleb)
+            soundVictory.play(); // Para ejecutar la musica de victoria (Caleb)
             cout << "Play again? (Y/N): ";
             cin >> run;
             if (run == 'Y') {
