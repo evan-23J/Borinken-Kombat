@@ -1,4 +1,8 @@
-*Para poder hacer uso de la libreria <SFML/Audio.hpp> debes configurar las propiedades de la misma,
+*Para poder hacer uso de la libreria <SFML/Audio.hpp> debes configurar las propiedades de la misma, para esto en Visual 
+Studio Community entre a View, click solution explorer -> click derecho a Proyecto COMP -> click properties, dentro del menu 
+click C/C++ -> click general and copy and paste path del folder include. Una vez hecho esto, diríjase al apartado de 
+"Linker" -> General -> Opcion 10 y aqui colocar el directorio del folder lib.
+
 Adjunto enlace de google drive donde estarán disponibles todos los archivos pertinentes al programa y su ejecución
 https://drive.google.com/drive/folders/1gpFWolSB-0bIj_2XS_0IuafL1trxNJ3F?usp=drive_link *
 
