@@ -7,9 +7,9 @@ int main()
     //Realizado por Evan Tellado
     char run = 'Y';
     //Stats = HP , Fuerza, Stamina
-    int stats1[3] = { 120, 75, 75 };
-    int stats2[3] = { 70, 100, 50 };
-    int stats3[3] = { 100, 75, 100 };
+    const int stats1[3] = { 120, 75, 75 };
+    const int stats2[3] = { 70, 100, 50 };
+    const int stats3[3] = { 100, 75, 100 };
 
     bool repeat = true;
 
@@ -171,7 +171,7 @@ int main()
             musicBattle.setVolume(50);  // Ajustar el volumen a la mitad (puedes cambiar este valor)
             musicBattle.play();  // Reproduce la música de fondo
 
-            cout << personaje1 << " VS " << personaje2 << endl;
+            cout <<"    "<< personaje1 << " VS " << personaje2 << endl;
             cout << "-----------------------------" << endl;
 
             cout << "              1" << endl;
