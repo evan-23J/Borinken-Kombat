@@ -1,3 +1,4 @@
+*Para poder hacer uso de la libreria <SFML/Audio.hpp> debes configurar las propiedades de la misma *
 1. Presiona cualquier tecla para comenzar el juego una vez este corriendo.
 
 2. Introduce cualquier número del 1 al 3 para elegir tu personaje.
